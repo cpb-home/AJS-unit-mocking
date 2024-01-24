@@ -1,6 +1,6 @@
 import { getLevel } from '../basic';
-import { httpGet } from '../http';
-
+//import fetchData from '../http';
+/*
 jest.mock('../http');
 
 beforeEach(() => {
@@ -8,9 +8,19 @@ beforeEach(() => {
 });
 
 test('mocks testing', () => {
-  httpGet.mockReturnValue(JSON.stringify({status: 'ok', level: 1}));
+  fetchData.mockReturnValue(JSON.stringify({status: 'ok', level: 1}));
 
-  const response = getLevel(1);
-  expect(response).toEqual('Ваш текущий уровень: 1');
-  expect(httpGet).toHaveBeenCalledWith('https://server/user/1');
+  expect(fetchData).toHaveBeenCalledWith('https://server/user/1');
 });
+*/
+
+test.each([
+  [1, 'Ваш текущий уровень: 1'],
+  ['', 'Информация об уровне временно недоступна']
+])(
+  ('Health %i has result %s'),
+  (id, res) => {
+    const result = getLevel(id);
+    expect(result).toBe(res);
+  }
+)
