@@ -1,7 +1,8 @@
-export function httpGet(url) {
-  throw new Error(url);
-}
+export default function fetchData(url) {
+  const parts = url.split('/user/');
 
-export function httpPost(url) {
-  throw new Error(url);
+  if (parts[1]) {
+    return JSON.stringify({status: 'ok', level: parts[1]});
+  }
+  return JSON.stringify({status: 'bad'});
 }

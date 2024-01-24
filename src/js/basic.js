@@ -1,7 +1,11 @@
-export default function sum(items) {
-  let result = 0;
-  for (const item of items) {
-    result += item;
+import fetchData from './http';
+
+export function getLevel(userId) {
+  const response = JSON.parse(fetchData(`https://server/user/${userId}`));
+  
+  if (response.status === 'ok') {
+    return `Ваш текущий уровень: ${response.level}`; 
   }
-  return result;
+  
+  return `Информация об уровне временно недоступна`;
 }
